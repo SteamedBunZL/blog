@@ -1,15 +1,12 @@
 ---
 layout:     post
-title:      "Hello 2017"
+title:      "自定义通知总结"
 subtitle:   " \"Hello World, Hello Blog\""
 date:       2015-01-29 12:00:00
 author:     "Steve"
 catalog: true
-tags:
-    - 生活
 ---
 
-> “Yeah It's on. ”
 
 
 #自定义通知总结
