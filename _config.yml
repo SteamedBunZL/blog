@@ -2,7 +2,7 @@
 title: Steve Blog
 SEOTitle: 张龙的博客 | Steve Blog
 header-img: img/home-bg.jpg
-email: huxpro@gmail.com
+email: stevezhang@tcl.com
 description: ""
 keyword: ""
 url: "https://steamedbunzl.me"              # your host, for absolute URL
@@ -51,16 +51,6 @@ ga_domain: steamedbunzl.me
 
 
 
-
-# Featured Tags
-featured-tags: true                     # whether or not using Feature-Tags
-featured-condition-size: 1              # A tag will be featured if the size of it is more than this condition value
-
-
-
-# Progressive Web Apps
-chrome-tab-theme-color: "#000000"
-service-worker: true
 
 
 
