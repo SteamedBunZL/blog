@@ -10,7 +10,8 @@ baseurl: ""                             # for example, '/blog' if your blog host
 
 
 
-
+# Sidebar settings
+sidebar: false  #添加侧边栏
 
 
 # Build settings
