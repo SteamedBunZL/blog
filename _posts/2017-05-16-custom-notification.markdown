@@ -1,7 +1,6 @@
 ---
 layout:     post
 title:      "自定义通知总结"
-subtitle:   " \"Hello World, Hello Blog\""
 date:       2017-05-17 12:00:00
 author:     "Steve"
 catalog: true
@@ -9,7 +8,7 @@ catalog: true
 
 
 
-#自定义通知总结
+##自定义通知总结
 
 
 最近公司在做自定义通知栏的相关需求，查询了相关的资料，把用到的东西和踩的一些坑做一下总结。自定义通知栏，也就是有别于系统的默认的样式，我们在看比如360、墨迹天气等等，都采用了自己特有的通知，那么这些通知是怎么做的呢？
@@ -36,8 +35,6 @@ catalog: true
         manager.notify(1, notification);
     }
 ```
-
-![](file:///Users/zhanglong/Desktop/自定义通知总结/notifcaiton1.png)
 
 上面是最最简单的通知了，相信大部人都知道如何去发一个通知
 
@@ -164,9 +161,6 @@ public class NotificationColorEngine {
 
 拿到了系统的颜色，好开心啊，这回产品无论要求怎么适配，我们都游刃有余了，慢着，只是单单显示出来好像并没有什么难度啊，那么问题来了，到底我们应该使用什么API去让自定义通知显示出来呢？
 
-先看一下最终的效果
-
-![](file:///Users/zhanglong/Desktop/notification2.png)
 
 既然说到了自定义通知栏，那么我们就离不开remoteviews的使用，因为离开它，你也实现不了自定义通知栏，感觉说了一大堆废话。。。。
 
@@ -179,6 +173,3 @@ RemoteViews remoteViews = new RemoteViews(mContext.getPackageName(),R.layout.not
 
 remoteviews去设置文字和图片有区别于我们一般使用的view,一般的view我们有findviewbyid去找到，但是remoteviews的更新，使用的是另外的方式
 
-
-
-这里实际上系统的底色是白色的，但是我们应用里可以去显示黑色的主题，也就是强行把通知栏的底色设置为黑色，刚开始在这里还纠结了一下下，因为我们
