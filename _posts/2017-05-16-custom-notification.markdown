@@ -162,5 +162,47 @@ public class NotificationColorEngine {
 RemoteViews remoteViews = new RemoteViews(mContext.getPackageName(),R.layout.notification_two_line);
 ```
 &#12288;&#12288;我们可以使用自定义的布局去生成一个remoteviews 然后再把remoteviews设置给notification的contentview属性,如果这么做的话,通过notify弹出的通知就是你自定义的布局。<br>
-　　remoteviews去设置文字和图片有区别于我们一般使用的view,一般的view我们有findviewbyid去找到，但是remoteviews的更新，使用的是另外的方式
+　　remoteviews去设置文字和图片有区别于我们一般使用的view,一般的view我们有findviewbyid去找到，但是remoteviews的更新，使用的是另外的方式remoteviews.setXXX属性或者set函数，但要把要调用的函数名称传进去，以完成对remoteview上的控件的更新。
+　　
+## 自定义通知栏遇到的坑
 
+&#12288;&#12288;在实际开发中碰到一个问题，就是自定义通知栏的点击问题，在平时开发的系统通知栏是没有这个问题的，什么问题？当我们点击一个自定义通知栏时，整个通知栏并没有自动上拉收缩，很神奇，但是系统自带的通知栏并不存在这个问题，Google了一下，发现需要反射去调用一个系统的StatusBarManager的伸缩方法才行
+
+```
+
+    public static void handleNotify(Context context, String hanlde) {
+        int currentApiVersion = android.os.Build.VERSION.SDK_INT;
+        try {
+            Object service = context.getSystemService("statusbar");
+            Class<?> statusbarManager = Class
+                    .forName("android.app.StatusBarManager");
+            Method expand = null;
+
+            if (service != null) {
+                if (currentApiVersion <= 16) {
+                    if (hanlde.equals("open")) {
+                        expand = statusbarManager.getMethod("expand");
+                    } else {
+                        expand = statusbarManager.getMethod("collapse");
+                    }
+                } else {
+                    if (hanlde == "open") {
+                        expand = statusbarManager.getMethod("expandNotificationsPanel");
+                    } else if (hanlde == "close") {
+                        expand = statusbarManager.getMethod("collapsePanels");
+                    }
+                }
+                expand.setAccessible(true);
+                expand.invoke(service);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+```
+每当我们监听到通知栏被点击的广播时，加上这么一句话就没问题了
+
+```
+AppUtils.handleNotify(context,"close");
+
+```
