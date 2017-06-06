@@ -8,7 +8,6 @@ catalog: true
 
 
 
-# 自定义通知总结
 
 　　最近公司在做自定义通知栏的相关需求，查询了相关的资料，把用到的东西和踩的一些坑做一下总结。自定义通知栏，也就是有别于系统的默认的样式，我们在看比如360、墨迹天气等等，都采用了自己特有的通知，那么这些通知是怎么做的呢？
 <br>&#12288;&#12288;先不说自定义通知栏，我们先看一个能发送普通通知的小例子
@@ -168,7 +167,7 @@ RemoteViews remoteViews = new RemoteViews(mContext.getPackageName(),R.layout.not
 
 &#12288;&#12288;在实际开发中碰到一个问题，就是自定义通知栏的点击问题，在平时开发的系统通知栏是没有这个问题的，什么问题？当我们点击一个自定义通知栏时，整个通知栏并没有自动上拉收缩，很神奇，但是系统自带的通知栏并不存在这个问题，Google了一下，发现需要反射去调用一个系统的StatusBarManager的伸缩方法才行
 
-```
+```java
 
     public static void handleNotify(Context context, String hanlde) {
         int currentApiVersion = android.os.Build.VERSION.SDK_INT;
